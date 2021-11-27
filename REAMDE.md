@@ -1,0 +1,1 @@
+JHub is a new project, with the objective to be a central hub to unite all of my previous and future projects. This is also a learning instrument for me to learn docker, kubernetes and micro-services. 
