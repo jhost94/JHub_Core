@@ -1,17 +1,19 @@
 package com.jhost.core.Core.service;
 
+import com.jhost.core.Core.config.Constants;
+import com.jhost.core.Core.service.meta.MessageService;
 import org.springframework.beans.factory.annotation.Autowired;
-import org.springframework.context.MessageSource;
-import org.springframework.context.i18n.LocaleContextHolder;
 import org.springframework.stereotype.Service;
+
+import java.util.Locale;
 
 @Service
 public class TestService {
 
     @Autowired
-    private MessageSource messageSource;
+    private MessageService messageService;
 
-    public String getTestMessage(){
-        return messageSource.getMessage("test.message", null, LocaleContextHolder.getLocale());
+    public String getTestMessage(Locale locale){
+        return messageService.getMessage(Constants.MessagePaths.TEST_MESSAGE, locale);
     }
 }

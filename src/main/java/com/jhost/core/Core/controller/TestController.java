@@ -17,6 +17,6 @@ public class TestController {
 
     @GetMapping
     public String test(final Locale locale){
-        return testService.getTestMessage();
+        return testService.getTestMessage(locale);
     }
 }

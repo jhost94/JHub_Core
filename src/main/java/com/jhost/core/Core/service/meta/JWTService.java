@@ -1,6 +1,6 @@
-package com.jhost.core.Core.service;
+package com.jhost.core.Core.service.meta;
 
-import com.jhost.core.Core.constants.CoreConstants;
+import com.jhost.core.Core.config.Constants;
 import com.jhost.core.Core.entity.User;
 import io.jsonwebtoken.Claims;
 import io.jsonwebtoken.Jwts;
@@ -9,7 +9,6 @@ import org.springframework.security.core.GrantedAuthority;
 import org.springframework.security.core.userdetails.UserDetails;
 import org.springframework.stereotype.Service;
 
-import java.util.Base64;
 import java.util.Collection;
 import java.util.Date;
 
@@ -18,20 +17,21 @@ public class JWTService {
 
     public String createToken(User user, UserDetails userDetails) {
         String username = userDetails.getUsername();
+
         Collection<? extends GrantedAuthority> authorities = userDetails.getAuthorities();
         return Jwts.builder()
                 .setSubject(username)
                 .setId(user.getId().toString())
-                .claim(CoreConstants.Security.AUTHORITIES, authorities)
-                .claim(CoreConstants.Security.NAME, user.getName())
-                .setExpiration(new Date(System.currentTimeMillis() + CoreConstants.Security.EXPIRATION_TIME))
-                .signWith(SignatureAlgorithm.HS512, CoreConstants.Security.AUTHORITIES)
+                .claim(Constants.Security.AUTHORITIES, authorities)
+                .claim(Constants.Security.NAME, user.getName())
+                .setExpiration(new Date(System.currentTimeMillis() + Constants.Security.EXPIRATION_TIME))
+                .signWith(SignatureAlgorithm.HS512, Constants.Security.AUTHORITIES)
                 .compact();
     }
 
     public Boolean hasTokenExpired(String token) {
         return Jwts.parser()
-                .setSigningKey(CoreConstants.Security.SECRET_KEY)
+                .setSigningKey(Constants.Security.SECRET_KEY)
                 .parseClaimsJws(token)
                 .getBody()
                 .getExpiration()
@@ -46,7 +46,7 @@ public class JWTService {
 
     public String extractUsername(String token) {
         return Jwts.parser()
-                .setSigningKey(CoreConstants.Security.SECRET_KEY)
+                .setSigningKey(Constants.Security.SECRET_KEY)
                 .parseClaimsJws(token)
                 .getBody()
                 .getSubject();
@@ -54,19 +54,19 @@ public class JWTService {
 
     public String getUserId(String token) {
         return Jwts.parser()
-                .setSigningKey(CoreConstants.Security.SECRET_KEY)
+                .setSigningKey(Constants.Security.SECRET_KEY)
                 .parseClaimsJws(token)
                 .getBody()
                 .getId();
     }
 
     public Collection<? extends GrantedAuthority> getAuthorities(String token) {
-        Claims claims = Jwts.parser().setSigningKey(CoreConstants.Security.SECRET_KEY).parseClaimsJws(token).getBody();
-        return (Collection<? extends GrantedAuthority>) claims.get(CoreConstants.Security.AUTHORITIES);
+        Claims claims = Jwts.parser().setSigningKey(Constants.Security.SECRET_KEY).parseClaimsJws(token).getBody();
+        return (Collection<? extends GrantedAuthority>) claims.get(Constants.Security.AUTHORITIES);
     }
 
     public String getName(String token) {
-        Claims claims = Jwts.parser().setSigningKey(CoreConstants.Security.SECRET_KEY).parseClaimsJws(token).getBody();
-        return (String) claims.get(CoreConstants.Security.NAME);
+        Claims claims = Jwts.parser().setSigningKey(Constants.Security.SECRET_KEY).parseClaimsJws(token).getBody();
+        return (String) claims.get(Constants.Security.NAME);
     }
 }

@@ -1,6 +1,6 @@
 package com.jhost.core.Core.config;
 
-import com.jhost.core.Core.service.CoreUserDetailsService;
+import com.jhost.core.Core.service.meta.CoreUserDetailsService;
 import lombok.extern.slf4j.Slf4j;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.context.annotation.Bean;

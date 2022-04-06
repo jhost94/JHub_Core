@@ -2,7 +2,7 @@ package com.jhost.core.Core.controller.error;
 
 
 import com.jhost.core.Core.bean.ErrorResponse;
-import com.jhost.core.Core.exception.UsernameNotFoundException;
+import com.jhost.core.Core.exception.meta.UsernameNotFoundException;
 import org.springframework.http.HttpStatus;
 import org.springframework.http.ResponseEntity;
 import org.springframework.web.bind.annotation.ExceptionHandler;

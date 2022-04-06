@@ -1,8 +1,7 @@
 package com.jhost.core.Core.config;
 
-import com.jhost.core.Core.constants.CoreConstants;
 import com.jhost.core.Core.repository.KeyRepository;
-import com.jhost.core.Core.service.JWTService;
+import com.jhost.core.Core.service.meta.JWTService;
 import com.jhost.core.Core.entity.Key;
 import org.slf4j.Logger;
 import org.slf4j.LoggerFactory;
@@ -60,7 +59,7 @@ public class JWTAuthorizationFilter extends OncePerRequestFilter {
 
     private Boolean isValidToken(HttpServletRequest request) {
         try {
-            String key = request.getHeader(CoreConstants.JWTToken.HEADER).replace(CoreConstants.JWTToken.PREFIX, "");
+            String key = request.getHeader(Constants.JWTToken.HEADER).replace(Constants.JWTToken.PREFIX, Constants.Strings.EMPTY);
             String username = jwtService.extractUsername(key);
             logger.info("{} token is trying to get authenticated ", username);
             Long userId = Long.parseLong(jwtService.getUserId(key));
@@ -72,16 +71,16 @@ public class JWTAuthorizationFilter extends OncePerRequestFilter {
     }
 
     private String getToken(HttpServletRequest request) {
-        return request.getHeader(CoreConstants.JWTToken.HEADER).replace(CoreConstants.JWTToken.PREFIX, "");
+        return request.getHeader(Constants.JWTToken.HEADER).replace(Constants.JWTToken.PREFIX, "");
     }
 
     private boolean tokenExist(HttpServletRequest request, HttpServletResponse res) {
-        String authenticationHeader = request.getHeader(CoreConstants.JWTToken.HEADER);
-        return !(authenticationHeader == null || !authenticationHeader.startsWith(CoreConstants.JWTToken.PREFIX));
+        String authenticationHeader = request.getHeader(Constants.JWTToken.HEADER);
+        return !(authenticationHeader == null || !authenticationHeader.startsWith(Constants.JWTToken.PREFIX));
     }
 
     public Collection getAuthorities() {
-        return List.of(new SimpleGrantedAuthority(CoreConstants.JWTToken.ROLE));
+        return List.of(new SimpleGrantedAuthority(Constants.JWTToken.ROLE));
     }
 
 }

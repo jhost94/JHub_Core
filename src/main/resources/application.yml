@@ -6,7 +6,8 @@ spring:
     password: 1a2b3c4d
   jpa:
     generate-ddl: true
-    hibernate.ddl-auto: update
+    hibernate:
+      ddl-auto: update
   messages:
     basename: message
     encoding: UTF-8

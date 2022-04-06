@@ -12,7 +12,7 @@
 	<artifactId>Core</artifactId>
 	<version>0.0.1-SNAPSHOT</version>
 	<name>Core</name>
-	<description>Core project for PROJECT NAME</description>
+	<description>Core project for JHub</description>
 	<properties>
 		<java.version>11</java.version>
 	</properties>
@@ -46,7 +46,6 @@
 		<dependency>
 			<groupId>org.projectlombok</groupId>
 			<artifactId>lombok</artifactId>
-			<optional>true</optional>
 		</dependency>
 
 		<dependency>

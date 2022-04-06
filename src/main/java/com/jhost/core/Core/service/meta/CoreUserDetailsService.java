@@ -1,8 +1,8 @@
-package com.jhost.core.Core.service;
+package com.jhost.core.Core.service.meta;
 
 import com.jhost.core.Core.bean.CoreUserDetails;
 import com.jhost.core.Core.entity.User;
-import com.jhost.core.Core.exception.UsernameNotFoundException;
+import com.jhost.core.Core.exception.meta.UsernameNotFoundException;
 import com.jhost.core.Core.repository.UserRepository;
 import org.springframework.security.core.userdetails.UserDetails;
 import org.springframework.security.core.userdetails.UserDetailsService;
