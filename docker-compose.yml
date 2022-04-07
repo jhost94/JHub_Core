@@ -26,6 +26,11 @@ services:
       - "8080:8080"
     depends_on:
       - db
+    environment:
+      - APPLICATION_TEXT="env text"
+      # not working - SPRING_DATASOURCE_URL=jdbc:mysql://localhost:3306/core?allowPublicKeyRetrieval=TRUE&useSSL=FALSE&createDatabaseIfNotExist=TRUE
+    networks:
+      - core-network
 
 volumes:
   core-dev-data:
