@@ -5,4 +5,5 @@ spring:
     username: root
     password: 1a2b3c4d
 application:
-  text: "prod text"
+  core:
+    env: "prod"

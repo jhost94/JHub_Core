@@ -20,4 +20,5 @@ logging:
     org:
       springframework: info
 application:
-  text: "config text"
+  core:
+    env: "build"
