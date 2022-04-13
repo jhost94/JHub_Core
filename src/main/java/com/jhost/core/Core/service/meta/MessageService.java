@@ -10,8 +10,11 @@ import java.util.Locale;
 @Service
 public class MessageService {
 
-    @Autowired
-    private MessageSource messageSource;
+    private final MessageSource messageSource;
+
+    public MessageService(MessageSource messageSource) {
+        this.messageSource = messageSource;
+    }
 
     public String getMessage(Constants.MessagePaths paths, Locale locale) {
         return messageSource.getMessage(paths.getMessage(), null, locale);

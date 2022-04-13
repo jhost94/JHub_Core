@@ -12,8 +12,11 @@ import java.util.Locale;
 @RequestMapping("/")
 public class TestController {
 
-    @Autowired
-    private TestService testService;
+    private final TestService testService;
+
+    public TestController(TestService testService) {
+        this.testService = testService;
+    }
 
     @GetMapping
     public String test(final Locale locale){
