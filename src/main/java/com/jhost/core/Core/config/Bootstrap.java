@@ -1,29 +1,27 @@
 package com.jhost.core.Core.config;
 
-import com.jhost.core.Core.service.meta.MessageService;
+import com.jhost.core.Core.bean.ApplicationEnvironment;
 import org.springframework.boot.CommandLineRunner;
 import org.springframework.context.annotation.Configuration;
 
-import java.util.Locale;
-
 @Configuration
 public class Bootstrap implements CommandLineRunner {
-
-    private final MessageService messageService;
     private final ConfigBean configBean;
 
-    public Bootstrap(MessageService messageService,
-                     ConfigBean configBean) {
-        this.messageService = messageService;
+    public Bootstrap(ConfigBean configBean) {
         this.configBean = configBean;
     }
 
     @Override
     public void run(String... args) throws Exception {
-        Locale localePT = new Locale("pt", "PT");
+        logEnv();
+    }
 
-        System.out.println(messageService.getMessage(Constants.MessagePaths.TEST_MESSAGE, localePT));
-        System.out.println(messageService.getMessage(Constants.MessagePaths.TEST_MESSAGE, Locale.US));
-        System.out.println("Running environment: " + configBean.getEnv().toString());
+    private void logEnv() {
+        System.out.println(
+                ApplicationEnvironment.isBuilding(configBean.getEnv()) ?
+                        "Building project." :
+                        "Running environment: " + configBean.getEnv().toString()
+        );
     }
 }

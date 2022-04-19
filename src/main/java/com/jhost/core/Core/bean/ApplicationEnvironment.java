@@ -3,6 +3,7 @@ package com.jhost.core.Core.bean;
 public enum ApplicationEnvironment {
     NONE,
     BUILD,
+    LOCAL_DEV,
     DEV,
     QA,
     PRE_RELEASE,
@@ -10,6 +11,8 @@ public enum ApplicationEnvironment {
 
     public static ApplicationEnvironment fromString(String env) {
         switch (env) {
+            case "local_dev":
+                return ApplicationEnvironment.LOCAL_DEV;
             case "dev":
                 return ApplicationEnvironment.DEV;
             case "qa":
@@ -23,5 +26,9 @@ public enum ApplicationEnvironment {
             default:
                 return ApplicationEnvironment.NONE;
         }
+    }
+
+    public static boolean isBuilding(ApplicationEnvironment env) {
+        return env.equals(ApplicationEnvironment.BUILD);
     }
 }

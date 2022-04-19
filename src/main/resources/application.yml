@@ -1,7 +1,7 @@
 spring:
   profiles:
     active:
-      - dev
+      - local_dev
   datasource:
     url: jdbc:mysql://localhost:3306/core?allowPublicKeyRetrieval=TRUE&useSSL=FALSE&createDatabaseIfNotExist=TRUE
     driver-class-name: com.mysql.cj.jdbc.Driver
