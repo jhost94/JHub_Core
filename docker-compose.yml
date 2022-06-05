@@ -15,6 +15,7 @@ services:
       - core-network
   core-be:
     build: .
+    container_name: core_be
     expose:
       - "8000"
     environment:
