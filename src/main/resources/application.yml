@@ -3,7 +3,7 @@ spring:
     active:
       - local_dev
   datasource:
-    url: jdbc:mysql://localhost:3306/core?allowPublicKeyRetrieval=TRUE&useSSL=FALSE&createDatabaseIfNotExist=TRUE
+    url: jdbc:mysql://core_mysql:3306/core?allowPublicKeyRetrieval=TRUE&useSSL=FALSE&createDatabaseIfNotExist=TRUE
     driver-class-name: com.mysql.cj.jdbc.Driver
     username: root
     password: 1a2b3c4d
@@ -19,6 +19,8 @@ logging:
   level:
     org:
       springframework: info
+server:
+  port: 8000
 application:
   core:
     env: "build"
