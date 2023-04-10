@@ -1,4 +1,4 @@
-package com.jhost.core.Core.config;
+package com.jhost.core.Core.security;
 
 import org.springframework.context.annotation.Configuration;
 import org.springframework.web.servlet.config.annotation.CorsRegistry;

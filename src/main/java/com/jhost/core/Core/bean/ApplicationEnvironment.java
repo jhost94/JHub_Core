@@ -3,7 +3,7 @@ package com.jhost.core.Core.bean;
 public enum ApplicationEnvironment {
     NONE,
     BUILD,
-    LOCAL_DEV,
+    LOCAL,
     DEV,
     QA,
     PRE_RELEASE,
@@ -11,8 +11,8 @@ public enum ApplicationEnvironment {
 
     public static ApplicationEnvironment fromString(String env) {
         switch (env) {
-            case "local_dev":
-                return ApplicationEnvironment.LOCAL_DEV;
+            case "local":
+                return ApplicationEnvironment.LOCAL;
             case "dev":
                 return ApplicationEnvironment.DEV;
             case "qa":

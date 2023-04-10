@@ -1,6 +1,6 @@
 package com.jhost.core.Core.bean;
 
-import com.jhost.core.Core.config.Constants;
+import com.jhost.core.Core.constants.JWT;
 import com.jhost.core.Core.entity.User;
 import lombok.EqualsAndHashCode;
 import org.springframework.security.core.GrantedAuthority;
@@ -21,7 +21,7 @@ public class CoreUserDetails implements UserDetails {
 
     @Override
     public Collection<? extends GrantedAuthority> getAuthorities() {
-        return List.of(new SimpleGrantedAuthority(Constants.JWTToken.ROLE));
+        return List.of(new SimpleGrantedAuthority(JWT.ROLE));
     }
 
     @Override

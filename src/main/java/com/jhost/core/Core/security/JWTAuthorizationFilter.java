@@ -1,5 +1,7 @@
-package com.jhost.core.Core.config;
+package com.jhost.core.Core.security;
 
+import com.jhost.core.Core.constants.JWT;
+import com.jhost.core.Core.constants.Strings;
 import com.jhost.core.Core.repository.KeyRepository;
 import com.jhost.core.Core.service.meta.JWTService;
 import com.jhost.core.Core.entity.Key;
@@ -59,7 +61,7 @@ public class JWTAuthorizationFilter extends OncePerRequestFilter {
 
     private Boolean isValidToken(HttpServletRequest request) {
         try {
-            String key = request.getHeader(Constants.JWTToken.HEADER).replace(Constants.JWTToken.PREFIX, Constants.Strings.EMPTY);
+            String key = request.getHeader(JWT.HEADER).replace(JWT.PREFIX, Strings.EMPTY);
             String username = jwtService.extractUsername(key);
             logger.info("{} token is trying to get authenticated ", username);
             Long userId = Long.parseLong(jwtService.getUserId(key));
@@ -71,16 +73,16 @@ public class JWTAuthorizationFilter extends OncePerRequestFilter {
     }
 
     private String getToken(HttpServletRequest request) {
-        return request.getHeader(Constants.JWTToken.HEADER).replace(Constants.JWTToken.PREFIX, "");
+        return request.getHeader(JWT.HEADER).replace(JWT.PREFIX, "");
     }
 
     private boolean tokenExist(HttpServletRequest request, HttpServletResponse res) {
-        String authenticationHeader = request.getHeader(Constants.JWTToken.HEADER);
-        return !(authenticationHeader == null || !authenticationHeader.startsWith(Constants.JWTToken.PREFIX));
+        String authenticationHeader = request.getHeader(JWT.HEADER);
+        return !(authenticationHeader == null || !authenticationHeader.startsWith(JWT.PREFIX));
     }
 
-    public Collection getAuthorities() {
-        return List.of(new SimpleGrantedAuthority(Constants.JWTToken.ROLE));
+    public Collection<SimpleGrantedAuthority> getAuthorities() {
+        return List.of(new SimpleGrantedAuthority(JWT.ROLE));
     }
 
 }

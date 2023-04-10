@@ -1,6 +1,6 @@
 package com.jhost.core.Core.service.meta;
 
-import com.jhost.core.Core.config.Constants;
+import com.jhost.core.Core.constants.Security;
 import com.jhost.core.Core.entity.User;
 import io.jsonwebtoken.Claims;
 import io.jsonwebtoken.Jwts;
@@ -22,18 +22,15 @@ public class JWTService {
         return Jwts.builder()
                 .setSubject(username)
                 .setId(user.getId().toString())
-                .claim(Constants.Security.AUTHORITIES, authorities)
-                .claim(Constants.Security.NAME, user.getName())
-                .setExpiration(new Date(System.currentTimeMillis() + Constants.Security.EXPIRATION_TIME))
-                .signWith(SignatureAlgorithm.HS512, Constants.Security.AUTHORITIES)
+                .claim(Security.AUTHORITIES, authorities)
+                .claim(Security.NAME, user.getName())
+                .setExpiration(new Date(System.currentTimeMillis() + Security.EXPIRATION_TIME))
+                .signWith(SignatureAlgorithm.HS512, Security.AUTHORITIES)
                 .compact();
     }
 
     public Boolean hasTokenExpired(String token) {
-        return Jwts.parser()
-                .setSigningKey(Constants.Security.SECRET_KEY)
-                .parseClaimsJws(token)
-                .getBody()
+        return getJWTClaims(token)
                 .getExpiration()
                 .before(new Date());
     }
@@ -45,28 +42,31 @@ public class JWTService {
     }
 
     public String extractUsername(String token) {
-        return Jwts.parser()
-                .setSigningKey(Constants.Security.SECRET_KEY)
-                .parseClaimsJws(token)
-                .getBody()
-                .getSubject();
+        return getJWTClaims(token).getSubject();
     }
 
     public String getUserId(String token) {
         return Jwts.parser()
-                .setSigningKey(Constants.Security.SECRET_KEY)
+                .setSigningKey(Security.SECRET_KEY)
                 .parseClaimsJws(token)
                 .getBody()
                 .getId();
     }
 
     public Collection<? extends GrantedAuthority> getAuthorities(String token) {
-        Claims claims = Jwts.parser().setSigningKey(Constants.Security.SECRET_KEY).parseClaimsJws(token).getBody();
-        return (Collection<? extends GrantedAuthority>) claims.get(Constants.Security.AUTHORITIES);
+        Claims claims = getJWTClaims(token);
+        return (Collection<? extends GrantedAuthority>) claims.get(Security.AUTHORITIES);
     }
 
     public String getName(String token) {
-        Claims claims = Jwts.parser().setSigningKey(Constants.Security.SECRET_KEY).parseClaimsJws(token).getBody();
-        return (String) claims.get(Constants.Security.NAME);
+        Claims claims = getJWTClaims(token);
+        return (String) claims.get(Security.NAME);
+    }
+
+    private Claims getJWTClaims(String token) {
+        return Jwts.parser()
+                .setSigningKey(Security.SECRET_KEY)
+                .parseClaimsJws(token)
+                .getBody();
     }
 }

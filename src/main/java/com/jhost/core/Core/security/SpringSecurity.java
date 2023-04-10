@@ -1,4 +1,4 @@
-package com.jhost.core.Core.config;
+package com.jhost.core.Core.security;
 
 import com.jhost.core.Core.service.meta.CoreUserDetailsService;
 import lombok.extern.slf4j.Slf4j;

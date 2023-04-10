@@ -1,6 +1,6 @@
 package com.jhost.core.Core.service;
 
-import com.jhost.core.Core.config.Constants;
+import com.jhost.core.Core.constants.MessagePaths;
 import org.springframework.stereotype.Service;
 
 import java.util.Locale;
@@ -9,6 +9,6 @@ import java.util.Locale;
 public class TestService {
 
     public String getTestMessage(Locale locale){
-        return Constants.MessagePaths.TEST_MESSAGE.getMessage();
+        return MessagePaths.TEST_MESSAGE.getMessage();
     }
 }
